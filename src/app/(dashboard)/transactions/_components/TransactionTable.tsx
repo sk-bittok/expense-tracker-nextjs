@@ -48,7 +48,7 @@ interface Props {
 
 type TransactionHistoryRow = GetTransactionHistoryType[0];
 
-const emptyData = [];
+const emptyData: any[] = [];
 
 export const columns: ColumnDef<TransactionHistoryRow>[] = [
 	{

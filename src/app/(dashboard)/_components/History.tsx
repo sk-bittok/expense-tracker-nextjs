@@ -191,15 +191,7 @@ function History({ userSettings }: Props) {
 	);
 }
 
-function CustomTooltip({
-	formatter,
-	payload,
-	active,
-}: {
-	formatter: Intl.NumberFormat;
-	payload: any;
-	active: boolean;
-}) {
+function CustomTooltip({ formatter, payload, active }: any) {
 	if (!active || !payload || payload.length === 0) {
 		return null;
 	}
