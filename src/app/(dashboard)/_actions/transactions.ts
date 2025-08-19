@@ -4,12 +4,12 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import {
-	CreateTransactionSchema,
 	type CreateTransactionType,
+	createTransactionSchema,
 } from "@/schema/transaction";
 
 export async function CreateTransaction(form: CreateTransactionType) {
-	const parsedBody = CreateTransactionSchema.safeParse(form);
+	const parsedBody = createTransactionSchema.safeParse(form);
 
 	if (!parsedBody.success) {
 		throw new Error(parsedBody.error.message);

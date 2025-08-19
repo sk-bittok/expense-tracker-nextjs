@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { type ReactNode, useCallback, useState } from "react";
-import { useForm } from "react-hook-form";
+import { type Resolver, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -37,8 +37,8 @@ import { dateToUTCDate } from "@/lib/helpers";
 import type { TransactionType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import {
-	CreateTransactionSchema,
 	type CreateTransactionType,
+	createTransactionSchema,
 } from "@/schema/transaction";
 import { CreateTransaction } from "../_actions/transactions";
 import CategorySelect from "./CategorySelect";
@@ -53,12 +53,15 @@ function CreateTransactionDialogue({ trigger, type }: Props) {
 	const [open, setOpen] = useState(false);
 
 	const form = useForm<CreateTransactionType>({
-		resolver: zodResolver(CreateTransactionSchema),
+		resolver: zodResolver(
+			createTransactionSchema,
+		) as Resolver<CreateTransactionType>,
 		defaultValues: {
 			type,
 			date: new Date(),
 			amount: 0.0,
 			description: "",
+			category: "",
 		},
 	});
 
